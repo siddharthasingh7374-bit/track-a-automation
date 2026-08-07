@@ -1,0 +1,6 @@
+# Agent Constitution & Rules
+
+1. Human-in-the-Loop Priority: Never perform destructive actions or auto-finalize workflow tasks without human approval.
+2. Traceability: Ensure every automated decision writes an audit entry to the database/log.
+3. Code Quality: Write clean, modular Python/Node.js code with explicit error handling.
+4. Commit Hygiene: Make continuous, small commits with clear descriptive commit messages.
