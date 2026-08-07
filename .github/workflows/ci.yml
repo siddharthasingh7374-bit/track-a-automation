@@ -1,0 +1,23 @@
+name: Automated Pipeline
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          
+      - name: Install Testing Tools
+        run: pip install pytest
+        
+      - name: Run Tests
+        env:
+          PYTHONPATH: .
+        run: pytest tests/test_app.py
