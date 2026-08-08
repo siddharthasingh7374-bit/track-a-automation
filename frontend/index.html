@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OnboardFlow — Automated Onboarding Coordinator</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#6d7890;--line:#e4e8f0;--blue:#3b6ff5;--green:#159a72;--amber:#c98712;--red:#d94b5c;--nav:#111827}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--ink)}
+.app{display:flex;min-height:100vh}.side{width:245px;background:var(--nav);color:#dbe3f2;padding:22px 16px;position:fixed;inset:0 auto 0 0}.brand{font-size:20px;font-weight:800;padding:8px 10px 28px;color:#fff}.brand span{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:9px;background:var(--blue);margin-right:8px;font-size:14px}.nav{display:grid;gap:6px}.nav button{border:0;background:transparent;color:#aeb9ce;text-align:left;padding:12px;border-radius:9px;font:inherit;cursor:pointer}.nav button.active,.nav button:hover{background:#202b40;color:#fff}.side .role{position:absolute;bottom:22px;left:20px;right:20px;border-top:1px solid #2b3548;padding-top:15px;font-size:12px;color:#91a0ba}.main{margin-left:245px;width:calc(100% - 245px)}header{height:72px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 30px}.search{background:#f3f5f9;border:1px solid var(--line);padding:9px 13px;border-radius:9px;width:270px;color:var(--muted)}.user{font-size:13px;color:var(--muted)}.content{padding:28px;max-width:1450px;margin:auto}.page{display:none}.page.active{display:block}.title{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px}.title h1{margin:0 0 5px;font-size:28px}.title p{margin:0;color:var(--muted)}button.primary,.btn{border:0;border-radius:9px;padding:10px 15px;font-weight:700;cursor:pointer}.primary{background:var(--blue);color:white}.btn{background:#fff;border:1px solid var(--line)}.cards{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:20px}.metric{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:18px}.metric .label{font-size:12px;color:var(--muted)}.metric .num{font-size:27px;font-weight:800;margin-top:8px}.metric .delta{font-size:11px;color:var(--green);margin-top:5px}.layout{display:grid;grid-template-columns:1.35fr .9fr;gap:18px}.card{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:20px}.card h2{font-size:16px;margin:0 0 15px}.table{width:100%;border-collapse:collapse}.table th,.table td{text-align:left;padding:13px 9px;border-bottom:1px solid var(--line);font-size:13px}.table th{color:var(--muted);font-weight:600}.badge{display:inline-block;padding:5px 8px;border-radius:999px;font-size:11px;font-weight:700}.green{background:#e5f7f1;color:var(--green)}.amber{background:#fff3da;color:var(--amber)}.red{background:#ffe7eb;color:var(--red)}.blue{background:#e8efff;color:var(--blue)}.gray{background:#eef1f6;color:#667085}.casegrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.kv{display:grid;grid-template-columns:145px 1fr;gap:9px;font-size:13px;margin:8px 0}.kv b{color:var(--muted);font-weight:600}.progress{height:8px;background:#edf0f5;border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;background:var(--blue);width:75%}.doc{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--line);padding:12px;border-radius:10px;margin:8px 0}.doc small{display:block;color:var(--muted);margin-top:3px}.actions{display:flex;gap:8px;margin-top:14px}.approve{background:#e5f7f1;color:var(--green);border:1px solid #c5eddf}.reject{background:#ffe7eb;color:var(--red);border:1px solid #ffd0d7}.notice{padding:12px;border-radius:10px;background:#fff7e6;border:1px solid #f4dfad;color:#8b650e;font-size:13px;margin-bottom:12px}.timeline{border-left:2px solid #dfe5ef;padding-left:17px}.event{position:relative;margin:0 0 18px;font-size:13px}.event:before{content:"";position:absolute;left:-24px;top:3px;width:9px;height:9px;border-radius:50%;background:var(--blue)}.event b{display:block}.event span{color:var(--muted);font-size:11px}.modal{position:fixed;inset:0;background:#10182799;display:none;place-items:center;padding:20px}.modal.open{display:grid}.modalbox{background:#fff;border-radius:14px;padding:22px;width:min(520px,100%)}input,select{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;margin:7px 0 14px;font:inherit}label{font-size:12px;color:var(--muted);font-weight:600}@media(max-width:1000px){.cards{grid-template-columns:repeat(2,1fr)}.layout,.casegrid{grid-template-columns:1fr}}@media(max-width:700px){.side{width:65px}.brand{font-size:0}.brand span{margin:0}.nav button{font-size:0;text-align:center}.main{margin-left:65px;width:calc(100% - 65px)}.search{display:none}.cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+  <div class="brand"><span>O</span>OnboardFlow</div>
+  <nav class="nav">
+    <button class="active" data-page="dashboard">▦ &nbsp; Dashboard</button>
+    <button data-page="cases">▣ &nbsp; Onboarding Cases</button>
+    <button data-page="review">✓ &nbsp; Human Review</button>
+    <button data-page="escalations">⚠ &nbsp; Escalations</button>
+    <button data-page="audit">◷ &nbsp; Audit Trail</button>
+  </nav>
+  <div class="role">Signed in as<br><b>Onboarding Coordinator</b></div>
+</aside>
+
+<main class="main">
+<header><input class="search" placeholder="Search cases, people, documents..."><div class="user">● System online &nbsp; | &nbsp; Coordinator</div></header>
+<div class="content">
+
+<section id="dashboard" class="page active">
+<div class="title"><div><h1>Onboarding Overview</h1><p>Automated onboarding with human-in-the-loop control.</p></div><button class="primary" onclick="openModal()">+ Create case</button></div>
+<div class="cards">
+<div class="metric"><div class="label">Active cases</div><div class="num">24</div><div class="delta">↑ 8% this week</div></div>
+<div class="metric"><div class="label">Awaiting documents</div><div class="num">7</div></div>
+<div class="metric"><div class="label">Human review</div><div class="num">5</div></div>
+<div class="metric"><div class="label">Escalated</div><div class="num">2</div></div>
+<div class="metric"><div class="label">Completed</div><div class="num">41</div><div class="delta">↑ 14% this month</div></div>
+</div>
+<div class="layout">
+<div class="card"><h2>Recent onboarding cases</h2><table class="table"><thead><tr><th>Case</th><th>Person</th><th>Status</th><th>Priority</th><th>Owner</th></tr></thead><tbody>
+<tr><td><b>ONB-1048</b></td><td>Alex Morgan</td><td><span class="badge amber">REVIEW_REQUIRED</span></td><td><span class="badge red">High</span></td><td>Priya</td></tr>
+<tr><td><b>ONB-1047</b></td><td>Jordan Lee</td><td><span class="badge blue">PROCESSING</span></td><td>Medium</td><td>System</td></tr>
+<tr><td><b>ONB-1046</b></td><td>Sam Taylor</td><td><span class="badge green">COMPLETED</span></td><td>Low</td><td>Priya</td></tr>
+<tr><td><b>ONB-1045</b></td><td>Casey Patel</td><td><span class="badge red">ESCALATED</span></td><td><span class="badge red">High</span></td><td>Manager</td></tr>
+</tbody></table></div>
+<div class="card"><h2>Workflow health</h2><div class="kv"><b>Automation rate</b><span>86%</span></div><div class="progress"><i style="width:86%"></i></div><div class="kv"><b>Human intervention</b><span>14%</span></div><div class="progress"><i style="width:14%"></i></div><div class="kv"><b>Escalation rate</b><span>4.8%</span></div><div class="progress"><i style="width:4.8%"></i></div><div class="notice" style="margin-top:18px">5 cases currently require reviewer attention.</div></div>
+</div>
+</section>
+
+<section id="cases" class="page">
+<div class="title"><div><h1>Onboarding Cases</h1><p>Create, track and manage onboarding workflows.</p></div><button class="primary" onclick="openModal()">+ Create case</button></div>
+<div class="card"><table class="table"><thead><tr><th>Case ID</th><th>Person</th><th>Department</th><th>State</th><th>Updated</th><th></th></tr></thead><tbody>
+<tr><td>ONB-1048</td><td>Alex Morgan</td><td>Engineering</td><td><span class="badge amber">REVIEW_REQUIRED</span></td><td>2 min ago</td><td><button class="btn" onclick="showPage('review')">Review</button></td></tr>
+<tr><td>ONB-1047</td><td>Jordan Lee</td><td>Finance</td><td><span class="badge blue">PROCESSING</span></td><td>7 min ago</td><td><button class="btn">Open</button></td></tr>
+<tr><td>ONB-1046</td><td>Sam Taylor</td><td>Sales</td><td><span class="badge green">COMPLETED</span></td><td>1 hr ago</td><td><button class="btn">Open</button></td></tr>
+</tbody></table></div>
+</section>
+
+<section id="review" class="page">
+<div class="title"><div><h1>Human Review Queue</h1><p>Automation recommends; an authorized human makes the final decision.</p></div></div>
+<div class="notice">⚠ Low-confidence or exceptional results must not silently complete a required workflow step.</div>
+<div class="casegrid">
+<div class="card"><h2>ONB-1048 · Alex Morgan</h2>
+<div class="kv"><b>Workflow state</b><span class="badge amber">REVIEW_REQUIRED</span></div>
+<div class="kv"><b>Document</b><span>Government ID</span></div>
+<div class="kv"><b>Automation result</b><span>Potential name mismatch</span></div>
+<div class="kv"><b>Confidence</b><span>0.72</span></div>
+<div class="kv"><b>Reason</b><span>Name differs from onboarding form by one character.</span></div>
+<div class="kv"><b>Deadline</b><span>Today, 4:30 PM</span></div>
+<div class="actions"><button class="btn approve" onclick="decision('APPROVED')">✓ Approve</button><button class="btn reject" onclick="decision('REJECTED')">✕ Reject</button><button class="btn" onclick="decision('ESCALATED')">Escalate</button></div>
+<div id="decision" class="notice" style="display:none;margin-top:12px"></div>
+</div>
+<div class="card"><h2>Document checklist</h2>
+<div class="doc"><div>Government ID<small>Uploaded · classified automatically</small></div><span class="badge amber">NEEDS_REVIEW</span></div>
+<div class="doc"><div>Proof of Address<small>Uploaded · validation passed</small></div><span class="badge green">VALID</span></div>
+<div class="doc"><div>Tax Form<small>Uploaded · validation passed</small></div><span class="badge green">VALID</span></div>
+</div>
+</div>
+</section>
+
+<section id="escalations" class="page">
+<div class="title"><div><h1>Escalations</h1><p>Overdue and exceptional cases requiring ownership.</p></div></div>
+<div class="card"><table class="table"><thead><tr><th>Case</th><th>Reason</th><th>Level</th><th>Owner</th><th>Status</th></tr></thead><tbody>
+<tr><td>ONB-1045</td><td>SLA breached · reviewer inactive</td><td>Level 2</td><td>Manager</td><td><span class="badge red">ESCALATED</span></td></tr>
+<tr><td>ONB-1039</td><td>Repeated document processing failure</td><td>Level 1</td><td>Team Lead</td><td><span class="badge amber">IN_PROGRESS</span></td></tr>
+</tbody></table></div>
+</section>
+
+<section id="audit" class="page">
+<div class="title"><div><h1>Audit Trail</h1><p>Append-only history of automated and human actions.</p></div></div>
+<div class="card"><div class="timeline">
+<div class="event"><b>AUTOMATION · Document classified</b><span>10:31:02 · ONB-1048 · confidence 0.72</span></div>
+<div class="event"><b>AUTOMATION · Validation result NEEDS_REVIEW</b><span>10:31:03 · reason: name mismatch</span></div>
+<div class="event"><b>SYSTEM · Human review requested</b><span>10:31:03 · reviewer queue assigned</span></div>
+<div class="event"><b>HUMAN · Reviewer opened case</b><span>11:14:27 · reviewer_123</span></div>
+</div></div>
+</section>
+
+</div></main></div>
+
+<div class="modal" id="modal"><div class="modalbox"><h2>Create onboarding case</h2><label>Person name</label><input id="person" placeholder="e.g. Alex Morgan"><label>Department</label><select id="dept"><option>Engineering</option><option>Finance</option><option>Sales</option><option>Operations</option></select><label>Priority</label><select id="prio"><option>Medium</option><option>High</option><option>Low</option></select><div class="actions"><button class="primary" onclick="createCase()">Create case</button><button class="btn" onclick="closeModal()">Cancel</button></div></div></div>
+
+<script>
+const buttons=document.querySelectorAll('.nav button'); const pages=document.querySelectorAll('.page');
+function showPage(id){pages.forEach(p=>p.classList.toggle('active',p.id===id));buttons.forEach(b=>b.classList.toggle('active',b.dataset.page===id));}
+buttons.forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+function openModal(){document.getElementById('modal').classList.add('open')}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+function createCase(){const name=document.getElementById('person').value.trim();if(!name){alert('Enter a person name');return}closeModal();showPage('cases');alert('Demo case created for '+name+'. Connect this action to the Python backend for persistence.')}
+function decision(s){const d=document.getElementById('decision');d.style.display='block';d.textContent=s==='APPROVED'?'✓ Human decision recorded: APPROVED':s==='REJECTED'?'✕ Human decision recorded: REJECTED':'⚠ Escalation created and assigned.'}
+</script>
+</body>
+</html>
