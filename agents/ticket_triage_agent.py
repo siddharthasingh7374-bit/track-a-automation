@@ -1,6 +1,6 @@
 def triage_ticket(ticket_text):
     """Classify a support ticket and draft a response.
-    
+
     The agent only recommends. Human approval is required before action.
     """
     text = ticket_text.lower()
@@ -57,11 +57,27 @@ def triage_ticket(ticket_text):
     else:
         sentiment = "Neutral"
 
+    # Determine confidence and reason
+    if category == "Billing":
+        confidence = 0.95
+        reason = "Ticket contains billing/payment-related keywords."
+    elif category == "Technical Support":
+        confidence = 0.90
+        reason = "Ticket contains technical issue keywords."
+    elif category == "Account":
+        confidence = 0.90
+        reason = "Ticket contains account-related keywords."
+    else:
+        confidence = 0.70
+        reason = "No specific category keywords were detected."
+
     return {
         "category": category,
         "priority": priority,
         "team": team,
         "sentiment": sentiment,
         "response": response,
+        "confidence": confidence,
+        "reason": reason,
         "status": "PENDING_HUMAN_APPROVAL",
     }
